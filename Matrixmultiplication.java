@@ -16,7 +16,7 @@ public class Matrixmultiplication {
             takevalue(matrix2,A,B);
 
             int[][] multi=new int [a][B];
-            int temp;
+            int temp=5;
             for(int i=0;i<a;i++){
                 for(int k=0;k<B;k++){
                     temp=0;

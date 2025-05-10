@@ -12,7 +12,6 @@ public class Shadowing{
                 sout(a); will be able to execute
          */
         System.out.println(a);
-        System.out.println(a);
         b=0;
         scope();
         scope();
