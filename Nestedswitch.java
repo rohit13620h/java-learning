@@ -20,7 +20,7 @@ public class Nestedswitch {
             case 3 :
                 System.out.println("three");
                 switch (s){
-                    case ("it") -> System.out.println("information technology");
+                    case "it" -> System.out.println("information technology");
                     case ("lab") -> System.out.println("lab assistant");
                     default -> System.out.println("no valid department");
                 }
