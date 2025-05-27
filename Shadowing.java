@@ -11,6 +11,7 @@ public class Shadowing{
                 a=9;    initializing
                 sout(a); will be able to execute
          */
+        a=59;
         System.out.println(a);
         b=0;
         scope();
