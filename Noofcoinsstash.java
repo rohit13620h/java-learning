@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Noofcoinsstash {
     static Scanner in = new Scanner(System.in);
-    static int[] coins={10,6,1},coinamount=new int[coins.length];
+    static int[] coins={11,6,1},coinamount=new int[coins.length];
     static int size=coins.length;
     static int amount,temp,min,num;
 
