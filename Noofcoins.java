@@ -19,7 +19,7 @@ public class Noofcoins {
         size = coins.size();
         coincount=new int[size];
         coincount2=new int[size];
-//      arrangecoinvalue(); //not needed
+        arrangecoinvalue(); //was not needed but might need for improving time complexity
 
         System.out.println("enter the amount");
         int amount = in.nextInt();
@@ -41,19 +41,19 @@ public class Noofcoins {
         }
     }
 
-//    static void arrangecoinvalue(){
-//        int temp;
-//        for (int i =0; i<size-1 ; i++ ){
-//            for(int j = 1; j<size ; j++){
-//                temp=coins.get(i);
-//                if(temp<coins.get(j)){
-//                    coins.set(i,coins.get(j));
-//                    coins.set(j,temp);
-//                }
-//            }
-//        }
-//        System.out.println(coins);
-//    }
+    static void arrangecoinvalue(){
+        int temp;
+        for (int i =0; i<size-1 ; i++ ){
+            for(int j = 1; j<size ; j++){
+                temp=coins.get(i);
+                if(temp<coins.get(j)){
+                    coins.set(i,coins.get(j));
+                    coins.set(j,temp);
+                }
+            }
+        }
+        System.out.println(coins);
+    }
 
     static void calc(int amount,int num,int[] coincount){
         for(int i = 0;i<size;i++){
@@ -100,8 +100,8 @@ public class Noofcoins {
     }
 
     static void ansprint(){
-        System.out.println("The minimum no of coins needed is" + min);
-        System.out.println("The needed are :");
+        System.out.println("The minimum no of coins needed is " + min);
+        System.out.println("The needed coins are :");
         for(int i=0;i<size;i++){
             if(coincount[i]>0){
                 System.out.println(coincount[i]+" of "+coins.get(i));
