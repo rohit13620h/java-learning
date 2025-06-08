@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class CharsearchinString {
     public static void main(String[] args) {
         String str = "kekfoasgnabuewop";
-        char target = 'h';
+        char target = 'k';
         System.out.println(str.toCharArray());
         System.out.println(Arrays.toString(str.toCharArray()));
 
