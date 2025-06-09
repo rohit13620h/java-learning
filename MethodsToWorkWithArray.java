@@ -1,5 +1,6 @@
 package idea.src;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -28,6 +29,7 @@ public class MethodsToWorkWithArray {
             }
         }
         return Arrays.copyOf(array,n);
+        //return array;
     }
 
     // to get a sorted array
@@ -59,6 +61,31 @@ public class MethodsToWorkWithArray {
         }
 
     }
+
+    static int[] negatearray(int[] array){
+        for(int i = 0 ; i < array.length; i++){
+            array[i]*=(-1);
+        }
+        return array;
+    }
+
+    static int[] addarrays(int[] first,int[] second){
+        int size1 = first.length,size2 = second.length;
+        int[] result=new int[size1+size2];
+        System.arraycopy(first,0,result,0,size1);
+        System.arraycopy(second,0,result,size1,size2);
+        return result;
+    }
+
+    static int[] converttoarray(ArrayList<Integer> lsit){
+        int size = lsit.size();
+        int[] array = new int[size];
+        for(int i =0 ; i<size; i++){
+            array[i]= lsit.get(i);
+        }
+        return array;
+    }
+
 
 
 }
