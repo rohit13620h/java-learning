@@ -1,6 +1,5 @@
 package idea.src;
 
-
 import java.util.Arrays;
 
 public class Decode {
@@ -15,17 +14,19 @@ public class Decode {
             value[i] = ((int) ch[i]);
         }
 
-        getbooleanvalue(value,boolvalue);
-
-        boolvalue=getrightboolsize(boolvalue);
+        boolvalue=getbooleanvalue(value,boolvalue);
 
         char[] result = new char[boolvalue.length/8];
 
         converttobase256ascii(boolvalue,result);
 
+        str answer=result.toString(result);
+
+        System.out.println(Arrays.toString(result));
+
     }
 
-    static void getbooleanvalue(int[] value,boolean[] boolvalue){
+    static boolean[] getbooleanvalue(int[] value,boolean[] boolvalue){
         for(int i=0;i<value.length;i++){
             if(value[i]>64 && value[i]<91){
                 value[i]=value[i]-65;
@@ -42,54 +43,53 @@ public class Decode {
             }
         }
 
-        int n=0;
+        int n=0,count=0;
 
         for(int i=value.length-1; i>=0;i--){
             for(int j = 0 ; j < 6 ; j++){
-                int mod = value[i]%2;
+                if(value[i]==-1){
+                    count++;
+                    break;
+                }
+
                 if(value[i]==1){
                     boolvalue[j+n]=true;
                     value[i]=0;
                 }else if(value[i]==0){
                     continue;
-                }else if(mod==1){
+                }else if(value[i]%2==1){
                     boolvalue[j+n]=true;
-                }else if(mod==0){
+                }else {
                     boolvalue[j+n]=false;
-                }else{
-                    n=n-4;
-                    break;
                 }
                 value[i]=value[i]/2;
          }
             n=n+6;
         }
-
-        rotateboolvalue(boolvalue);
+        return rotateboolvalue(boolvalue,count*8);
     }
 
-    static void rotateboolvalue(boolean[] boolvalue){
+    static boolean[] rotateboolvalue(boolean[] boolvalue,int num){
         boolean temp ;
         int len=boolvalue.length;
-        for(int i = 0;i<len/2;i++){
-            temp=boolvalue[i];
-            boolvalue[i]=boolvalue[len-1-i];
-            boolvalue[len-1-i]=temp;
+        boolean[] result = new boolean[len-num];
+        for(int i = len-1;i>num;i--){
+            result[len-1-i]=boolvalue[i];
         }
-    }
-
-    static boolean[] getrightboolsize(boolean[] boolvalue){
-        boolean[] boolarray=new boolean[boolvalue.length];
-        System.arraycopy(boolvalue,8,boolarray,0,376);
-        return Arrays.copyOf(boolarray,376);
+        return result;
     }
 
     static void converttobase256ascii(boolean[] boolvaue,char[] result){
-        int temp;
+        int temp,n=0;
         for(int i=0 ; i<result.length;i++){
-
+            temp = 0;
+            for(int j = 0 ; j<8 ; j++){
+                if(boolvaue[j+n]){
+                    temp+=(int)Math.pow(2,7-j);
+                }
+            }
+            result[i]=(char) temp;
+            n+=8;
         }
-
     }
-
 }
