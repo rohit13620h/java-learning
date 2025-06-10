@@ -20,8 +20,6 @@ public class Decode {
 
         converttobase256ascii(boolvalue,result);
 
-        str answer=result.toString(result);
-
         System.out.println(Arrays.toString(result));
 
     }
