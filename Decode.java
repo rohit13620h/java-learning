@@ -1,7 +1,5 @@
 package idea.src;
 
-import java.util.Arrays;
-
 public class Decode {
     public static void main(String[] args) {
         String str = "RGFuZyB5b3UgZGlkIGl0IC4gWW91IHRyaWVkIHRvIHVzZSB0aGUgYWkgbG9sIA==";
@@ -15,12 +13,12 @@ public class Decode {
         }
 
         boolvalue=getbooleanvalue(value,boolvalue);
-
         char[] result = new char[boolvalue.length/8];
-
         converttobase256ascii(boolvalue,result);
 
-        System.out.println(Arrays.toString(result));
+        for(char c:result){
+            System.out.print(c);
+        }
 
     }
 
@@ -68,7 +66,6 @@ public class Decode {
     }
 
     static boolean[] rotateboolvalue(boolean[] boolvalue,int num){
-        boolean temp ;
         int len=boolvalue.length;
         boolean[] result = new boolean[len-num];
         for(int i = len-1;i>num;i--){
