@@ -17,8 +17,6 @@ public class ElementInAInfiniteSortedArray {
         System.out.println("enter the element you want to search for");
         int target = in.nextInt();
 
-//        int position = elementposition(givenarray,target); // it thought i used binary search but it was linear
-
         int position = getrange(givenarray,target);
 
         System.out.println(Arrays.toString(givenarray));
@@ -63,28 +61,16 @@ public class ElementInAInfiniteSortedArray {
     static int getrange(int[] array,int target){
         int start = 0,end=1;
         while(true){
-            if (check(end,array)){
-                    end=end-1-(end-start)/2;
-                continue;
-            }else if(start==end){
-                if(check(end+1,array)){
-                    if(target==array[end]){
-                        return end;
-                    }
-                    return -1;
-                }
-            }
-            if(target<=array[end]){
+            if(check(end,array) || target<=array[end]){
                 return binarysearch(array,target,start,end);
             }else{
-                start=end;
-                end=3*end/2+1;
+                start=end+1;
+                end=2*end;
             }
         }
     }
 
     static boolean check(int index,int[] array){
-
         try{
             int i =array[index];
             return false;
@@ -98,6 +84,10 @@ public class ElementInAInfiniteSortedArray {
         int mid;
         while(start<=end){
             mid=start+(end-start)/2;
+            if (check(mid,array)) {
+                end=mid-1;
+                continue;
+            }
             if(array[mid]==target){
                 return mid;
             }else if(array[mid]<target){
@@ -109,44 +99,4 @@ public class ElementInAInfiniteSortedArray {
         return -1;
     }
 
-//    static int elementposition(int[] array,int target){
-//
-//
-//        //this is linear search
-//        int n = 0,m=0;
-//
-//        while(true){
-////         if(array[m]=='\0'){
-////             m=m-1;
-////         }else{
-//             if(array[m]<target){
-//                 if(array[m+1]>=Integer.MIN_VALUE){
-//                     n=m+1;
-//                     m=m+1;
-//                 }else{
-//                     return -1;
-//                 }
-//             }else{
-//                 if(array[n]==target){
-//                     return n;
-//                 }
-//
-////                 int mid;
-////                 while(true){
-////                     mid=n+(m-n)/2;
-////                     if(n>m){
-////                         return -1;
-////                     }
-////                     if(array[mid]==target){
-////                         return mid;
-////                     }else if(array[mid]<target){
-////                         n=mid+1;
-////                     }else{
-////                         m=mid-1;
-////                     }
-////                 }
-//             }
-////         }
-//        }
-//    }
 }
