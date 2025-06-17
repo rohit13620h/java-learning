@@ -91,12 +91,7 @@ public class PeakIndexInMountainArray {
         outerloop :
         while(true){
             mid=start+(end-start)/2;
-            if(start+1==end||start==end){
-                if(array[start]<array[end]){
-                    index=end;
-                    value=array[end];
-                    break;
-                }
+            if(start==end){
                 index = start;
                 value =  array[start];
                 break;
