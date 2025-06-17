@@ -3,28 +3,61 @@ package idea.src;
 largetst sum among the sub array
  */
 
-public class Largestsumamongsubarray {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Smallestlargestsumamongsubarray {
     public static void main(String[] args) {
-        int[] array = {7,2,5,10,8};
-        int m = 3;
+        int[] array = {7, 2, 5, 10, 8};
+        int m = 2;
 
-        int largestsum=div(array,m);
-
-        System.out.println(largestsum);
-    }
-
-    static int div (int[] array , int m ){
-
-
+        int ans = maxmin(array,m);
+        System.out.println(ans);
 
     }
 
-    static int findsum(int[] array, int start, int end){
-        int sum=0;
-        for(int i=start;i<=end;i++){
-            sum+=array[i];
+    static int maxmin(int[] array , int m ){
+        int maxsum=0,minsum=0,ans;
+        for(int i:array){
+            maxsum+=i;
+            if(i>minsum){
+                minsum=i;
+            }
         }
-        return sum;
+        if(m==1){
+            return maxsum;
+        }else if (m==array.length){
+            return minsum;
+        }
+
+        ans=findans(array,m,minsum,maxsum);
+        return ans;
+    }
+
+    static int findans(int[] array , int m , int start, int end){
+        while(start<=end){
+            if(start==end){
+                return start;
+            }
+            int sum =0, count =0,mid;
+            mid=start+(end-start)/2;
+            for(int i :array){
+                sum+=i;
+                if(sum>mid){
+                    sum=i;
+                    count++;
+                }
+                if(i==array[array.length-1]){
+                    count++;
+                }
+            }
+            if(count <= m){
+                end=mid;
+            }else if (count > m){
+                start= mid+1;
+            }
+        }
+        return -1;
     }
 
 }
