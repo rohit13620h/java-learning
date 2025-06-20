@@ -25,7 +25,8 @@ public class Searchin2Darraymyway {
                         while(start<=end){
                             mid=start+(end-start)/2;
                             if(array[mid][i]==target){
-                                result=mid;
+                                returnarray[0]=mid;
+                                returnarray[1]=i;
                                 break;
                             }else if(array[mid][i]<target){
                                 start=mid+1;
@@ -33,8 +34,6 @@ public class Searchin2Darraymyway {
                                 end=mid-1;
                             }
                         }
-                        returnarray[0]=result;
-                        returnarray[1]=i;
                         break;
                     }
                     returnarray[0]=i;
