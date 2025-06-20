@@ -3,7 +3,7 @@ package idea.src;
 
 import java.util.Arrays;
 
-public class BinarySearchWith2DArraySimpler {
+public class Searchin2Darray {
     public static void main(String[] args){
         int[][] array = {{1,5,9},
                         {2,9,18},

@@ -1,10 +1,9 @@
 package idea.src;
 //ifmatrix is sorted in rowwise ans columnwise manner
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class BinarySearchWith2DArray {
+public class Searchin2Darraymyway {
     public static void main(String[] args){
         int[][] array = {{1,5,9},{2,9,18},{9,15,50}};
         int target = 555;
