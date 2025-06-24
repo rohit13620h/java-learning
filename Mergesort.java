@@ -4,46 +4,51 @@ import java.util.Arrays;
 
 public class Mergesort {
     public static void main(String[] args) {
-        int[] array = {9,6,0,3,2,5,4,8,1};
-        sort(array);
+        int[] array = {9,6,0,3,98,65};
+        sort(array,0,array.length-1);
         System.out.println(Arrays.toString(array));
     }
 
-    static void sort(int[] array){
-        if(array.length==1){
-        }else if(array.length==2){
-            if(array[0]>array[1]){
-                int temp=array[0];
-                array[0]=array[1];
-                array[1]=temp;
+    static void sort(int[] array,int start,int end){
+        if(end==start){
+        }else if(end-start==1){
+            if(array[start]>array[end]){
+                swap(array,start,end);
             }
         }else{
-            int mid =  array.length/2;
-            int size = array.length;
-            int[] newarray=new int[mid];
-            int[] newarray2=new int[array.length-mid];
-            System.arraycopy(array,0,newarray,0,mid);
-            System.arraycopy(array,mid,newarray2,0,array.length-mid);
-            sort(newarray);
-            sort(newarray2);
-            System.arraycopy(newarray,0,array,0,mid);
-            System.arraycopy(newarray2,0,array,mid,array.length-mid);
-            insertionsort(array);
+            int size=end-start+1;
+            int mid =  start+(end-start)/2;
+            int[] newarray=array.clone();
+            sort(newarray,0,mid-1);
+            sort(newarray,mid,size-1);
+            merge(array,newarray,start,mid-1,mid,size-1);
         }
     }
 
-    static void insertionsort(int[] array){
-        int mid=array.length/2;
-        for(mid=mid;mid<array.length;mid++){
-            int tocheck=mid;
-            for(int i = mid-1;i>=0;i--){
-                if(array[tocheck]<array[i]){
-                    int temp=array[tocheck];
-                    array[tocheck]=array[i];
-                    array[i]=temp;
-                    tocheck--;
-                }
+    static void merge(int[] array,int[] newarray,int lowstart,int lowend, int highstart,int highend){
+        for(int i = 0 ; i<=highend ; i++){
+            if(lowstart==lowend+1){
+                array[i]=newarray[highstart];
+                highstart++;
+                continue;
+            }else if(highstart==highend+1){
+                array[i]=newarray[lowstart];
+                lowstart++;
+                continue;
+            }
+            if(newarray[lowstart]>newarray[highstart]){
+                array[i]=newarray[highstart];
+                highstart++;
+            }else{
+                array[i]=newarray[lowstart];
+                lowstart++;
             }
         }
+    }
+
+    static void swap(int[] array,int index,int last){
+        int temp=array[index];
+        array[index]=array[last];
+        array[last]=temp;
     }
 }
