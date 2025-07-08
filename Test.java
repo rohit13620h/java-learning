@@ -2,60 +2,53 @@ package idea.src;
 
 import java.util.Arrays;
 
-public class Test {
-    public static void main(String[] args) {
-        int[] array = { 20, 15,9,5};
-        int[] newarray=array.clone();
-        sort(array,newarray,0,array.length-1);
-        if (array.length==2){
-            array=newarray;
-        }
+public class Test{
+    public static void main(String[] args){
+        int[] array = {55,6,9,63,54,645,12,354,213,4};
+
+        mergesort(array);
         System.out.println(Arrays.toString(array));
-    }
-
-    static void sort(int[] array,int[] newarr, int start, int end){
-            if(end-start<=1){
-                if(newarr[start]>newarr[end]){
-                    swap(newarr,start,end);
-                }
-            }else{
-                int mid=start+(end-start)/2;
-                sort(newarr,array,start,mid);
-                sort(newarr,array,mid+1,end);
-                merge(array,newarr,start,mid,mid+1,end);
-            }
 
     }
+    static void mergesort(int[] array){
+        int start=0,end=array.length-1;
+        int[] copyarray=array.clone();
+        dividearray(array,copyarray,start,end);
 
-    static void merge(int[] array,int[] newarray,int start,int mid,int aftermid,int end){
-        for(int i = start ; i<=end ; i++){
-            if(newarray[start]>newarray[aftermid]){
-                array[i]=newarray[aftermid];
-                aftermid++;
-            }else{
-                array[i]=newarray[start];
-                start++;
-            }
-            if(start>mid){
-                for(int j=i+1;j<=end;j++){
-                    array[j]=newarray[aftermid];
-                    aftermid++;
-                }
-                break;
-            }else if(aftermid>end){
-                for(int j =i+1;j<=end;j++){
-                    array[j]=newarray[start];
-                    start++;
-                }
-                break;
-            }
-
+    }
+    static void dividearray(int[] array,int[] copyarray,int start, int end){
+        if(start>=end){
+            return;
         }
-    }
+        int mid=start+(end-start)/2;
+        dividearray(array,copyarray,start,mid);
+        dividearray(array,copyarray,mid+1,end);
 
-    static void swap(int[] array,int index,int last){
-        int temp=array[index];
-        array[index]=array[last];
-        array[last]=temp;
+        merge(array,copyarray,start,mid,end);
+        System.arraycopy(copyarray,start,array,start,end-start+1);
+    }
+    static void merge(int[] array,int[] copyarray,int start,int mid,int end){
+        int lowstart=start,lowend=mid,highstart=mid+1,highend=end;
+        for(int i=start;i<=end;i++){
+
+            if(lowstart>lowend){
+                copyarray[i]=array[highstart];
+                highstart++;
+                continue;
+            }else if(highstart>highend){
+                copyarray[i]=array[lowstart];
+                lowstart++;
+                continue;
+            }
+
+            if(array[lowstart]>array[highstart]){
+                copyarray[i]=array[highstart];
+                highstart++;
+            }else{
+                copyarray[i]=array[lowstart];
+                lowstart++;
+            }
+        }
+
     }
 }

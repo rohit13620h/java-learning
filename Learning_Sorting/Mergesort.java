@@ -2,53 +2,53 @@ package idea.src.Learning_Sorting;
 
 import java.util.Arrays;
 
-public class Mergesort {
-    public static void main(String[] args) {
-        int[] array = {9,6,0,3,98,65};
-        sort(array,0,array.length-1);
+public class Mergesort{
+    public static void main(String[] args){
+        int[] array = {55,6,9,63,54,645,12,354,213,4};
+
+        mergesort(array);
         System.out.println(Arrays.toString(array));
-    }
 
-    static void sort(int[] array,int start,int end){
-        if(end==start){
-        }else if(end-start==1){
-            if(array[start]>array[end]){
-                swap(array,start,end);
-            }
-        }else{
-            int size=end-start+1;
-            int mid =  start+(end-start)/2;
-            int[] newarray=array.clone();
-            sort(newarray,0,mid-1);
-            sort(newarray,mid,size-1);
-            merge(array,newarray,start,mid-1,mid,size-1);
+    }
+    static void mergesort(int[] array){
+        int start=0,end=array.length-1;
+        int[] copyarray=array.clone();
+        dividearray(array,copyarray,start,end);
+
+    }
+    static void dividearray(int[] array,int[] copyarray,int start, int end){
+        if(start>=end){
+            return;
         }
-    }
+        int mid=start+(end-start)/2;
+        dividearray(array,copyarray,start,mid);
+        dividearray(array,copyarray,mid+1,end);
 
-    static void merge(int[] array,int[] newarray,int lowstart,int lowend, int highstart,int highend){
-        for(int i = 0 ; i<=highend ; i++){
-            if(lowstart==lowend+1){
-                array[i]=newarray[highstart];
+        merge(array,copyarray,start,mid,end);
+        System.arraycopy(copyarray,start,array,start,end-start+1);
+    }
+    static void merge(int[] array,int[] copyarray,int start,int mid,int end){
+        int lowstart=start,lowend=mid,highstart=mid+1,highend=end;
+        for(int i=start;i<=end;i++){
+
+            if(lowstart>lowend){
+                copyarray[i]=array[highstart];
                 highstart++;
                 continue;
-            }else if(highstart==highend+1){
-                array[i]=newarray[lowstart];
+            }else if(highstart>highend){
+                copyarray[i]=array[lowstart];
                 lowstart++;
                 continue;
             }
-            if(newarray[lowstart]>newarray[highstart]){
-                array[i]=newarray[highstart];
+
+            if(array[lowstart]>array[highstart]){
+                copyarray[i]=array[highstart];
                 highstart++;
             }else{
-                array[i]=newarray[lowstart];
+                copyarray[i]=array[lowstart];
                 lowstart++;
             }
         }
-    }
 
-    static void swap(int[] array,int index,int last){
-        int temp=array[index];
-        array[index]=array[last];
-        array[last]=temp;
     }
 }
